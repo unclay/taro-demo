@@ -1,6 +1,7 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import './index.less'
+import imgFE from '../../assets/img/fe.png'
 
 export default class Index extends Component {
 
@@ -28,6 +29,7 @@ export default class Index extends Component {
   render () {
     return (
       <View className='index'>
+        <Image className='img-fe' src={imgFE}></Image>
         <Text>Hello world!</Text>
       </View>
     )

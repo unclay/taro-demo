@@ -1,3 +1,14 @@
+const address = require('address');
+
+/**
+ * 获取 ip
+ */
+const getAddressIP = () => {
+  const ip = address.ip();
+  if (/192(\.[0-9]{1,3}){3}/.test(ip)) return ip;
+  return address.ip('以太网') || ip;
+};
+
 const config = {
   projectName: 'taro-demo',
   date: '2019-10-14',
@@ -8,7 +19,7 @@ const config = {
     '828': 1.81 / 2
   },
   sourceRoot: 'src',
-  outputRoot: 'dist',
+  outputRoot: `dist/${process.env.TARO_ENV}`,
   plugins: {
     babel: {
       sourceMap: true,
@@ -68,8 +79,14 @@ const config = {
     }
   },
   h5: {
-    publicPath: '/',
+    // publicPath: '/',
     staticDirectory: 'static',
+    output: {
+      publicPath: './',
+    },
+    devServer: {
+      host: getAddressIP()
+    },
     module: {
       postcss: {
         autoprefixer: {
